@@ -2,8 +2,16 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const io = require("socket.io")(server)
 // Requiring passport as we've configured it
 const passport = require("./config/passport");
+
+io.on("connection", socket => {
+  socket.emit("chat-message", "Hello World");
+  socket.on("send-chat-message", message => {
+    socket.broadcast.emit("chat-message", message);
+  });
+});
 
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 8080;
