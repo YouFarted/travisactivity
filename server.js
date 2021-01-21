@@ -1,4 +1,5 @@
 // Requiring necessary npm packages
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const io = require("socket.io")(server)
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 8080;
 const db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication
+
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
