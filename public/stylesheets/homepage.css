@@ -1,5 +1,3 @@
-img {
-    display: block;
-    max-width: 200px;
-    height: auto
+figure{
+    max-height: 50%;
 }
