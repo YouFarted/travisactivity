@@ -8,6 +8,9 @@ const passport = require("./config/passport");
 
 io.on("connection", socket => {
   socket.emit("chat-message", "Hello World");
+  socket.on("send-chat-message", message => {
+    socket.broadcast.emit("chat-message", message);
+  });
 });
 
 // Setting up port and requiring models for syncing
