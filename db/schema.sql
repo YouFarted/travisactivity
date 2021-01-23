@@ -1,6 +1,7 @@
-CREATE DATABASE dating_app
+DROP DATABASE IF EXISTS dating_app;
+CREATE DATABASE dating_app;
 
-USE dating_app
+USE dating_app;
 
 CREATE TABLE users (
 username VARCHAR (30) NOT NULL,
