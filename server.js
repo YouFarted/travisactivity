@@ -3,38 +3,51 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 
-// Requiring passport as we've configured it
-const passport = require("./config/passport");
+let doOnlySeeding = false;
 
-// Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8080;
-const db = require("./models");
+const args = process.argv.slice(2);
 
-// Creating express app and configuring middleware needed for authentication
+if (args.length === 1 && args[0] === "seed") {
+  console.log("seeding the database");
+  doOnlySeeding = true;
+}
 
-const app = express();
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
-// We need to use sessions to keep track of our user's login status
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+if (doOnlySeeding) {
+  require("./lib/databaseSeed")();
+} else {
+  // Requiring passport as we've configured it
+  const passport = require("./config/passport");
 
-const authRoutes = require("./routes/authRoutes");
-const htmlRoutes = require("./routes/htmlRoutes");
+  // Setting up port and requiring models for syncing
+  const PORT = process.env.PORT || 8080;
+  const db = require("./models");
 
-app.use(authRoutes, htmlRoutes);
+  // Creating express app and configuring middleware needed for authentication
 
-// Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+  const app = express();
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+  app.use(express.static("public"));
+  // We need to use sessions to keep track of our user's login status
+  app.use(
+    session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  const authRoutes = require("./routes/authRoutes");
+  const htmlRoutes = require("./routes/htmlRoutes");
+
+  app.use(authRoutes, htmlRoutes);
+
+  // Syncing our database and logging a message to the user upon success
+  db.sequelize.sync().then(() => {
+    app.listen(PORT, () => {
+      console.log(
+        "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+        PORT,
+        PORT
+      );
+    });
   });
-});
+}
