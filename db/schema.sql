@@ -1,6 +1,7 @@
-CREATE DATABASE dating_app
+DROP DATABASE IF EXISTS dating_app;
+CREATE DATABASE dating_app;
 
-USE dating_app
+USE dating_app;
 
 CREATE TABLE users (
 username VARCHAR (30) NOT NULL,
@@ -14,7 +15,8 @@ hobbies VARCHAR (255),
 password VARCHAR (255) NOT NULL,
 createdAt DATETIME,
 updatedAT DATETIME,
-PRIMARY KEY (username))
+PRIMARY KEY (username));
+
 
 CREATE TABLE messages (
 id INT NOT NULL AUTO_INCREMENT,
@@ -26,7 +28,7 @@ createdAt DATETIME,
 updatedAT DATETIME,
 PRIMARY KEY (id),
 FOREIGN KEY (sendingUser_id) REFERENCES users(username),
-FOREIGN KEY (receivingUser_id) REFERENCES users(username))
+FOREIGN KEY (receivingUser_id) REFERENCES users(username));
 
 CREATE TABLE addresses (
 id INT NOT NULL AUTO_INCREMENT,
@@ -38,7 +40,7 @@ user_id VARCHAR (50) NOT NULL,
 createdAt DATETIME,
 updatedAT DATETIME,
 PRIMARY KEY (id),
-FOREIGN KEY (user_id) REFERENCES users(username))
+FOREIGN KEY (user_id) REFERENCES users(username));
 
 CREATE TABLE photos (
 id INT NOT NULL AUTO_INCREMENT,
@@ -48,4 +50,4 @@ user_id VARCHAR (50) NOT NULL,
 createdAt DATETIME,
 updatedAT DATETIME,
 FOREIGN KEY (user_id) REFERENCES users(username),
-PRIMARY KEY (id))
+PRIMARY KEY (id));
