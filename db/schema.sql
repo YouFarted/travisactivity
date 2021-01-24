@@ -12,6 +12,8 @@ age INTEGER  (3) NOT NULL,
 gender VARCHAR (10) NOT NULL,
 hobbies VARCHAR (255),
 password VARCHAR (255) NOT NULL,
+createdAt DATETIME,
+updatedAT DATETIME,
 PRIMARY KEY (username))
 
 CREATE TABLE messages (
@@ -20,6 +22,8 @@ subject VARCHAR (50) NOT NULL,
 body VARCHAR (255) NOT NULL,
 sendingUser_id VARCHAR (30) NOT NULL,
 receivingUser_id VARCHAR (30) NOT NULL,
+createdAt DATETIME,
+updatedAT DATETIME,
 PRIMARY KEY (id),
 FOREIGN KEY (sendingUser_id) REFERENCES users(username),
 FOREIGN KEY (receivingUser_id) REFERENCES users(username))
@@ -31,6 +35,8 @@ city VARCHAR (50) NOT NULL,
 state VARCHAR (50) NOT NULL,
 postalCode VARCHAR (10) NOT NULL,
 user_id VARCHAR (50) NOT NULL,
+createdAt DATETIME,
+updatedAT DATETIME,
 PRIMARY KEY (id),
 FOREIGN KEY (user_id) REFERENCES users(username))
 
@@ -39,5 +45,7 @@ id INT NOT NULL AUTO_INCREMENT,
 description VARCHAR (255),
 attachment BLOB NOT NULL,
 user_id VARCHAR (50) NOT NULL,
+createdAt DATETIME,
+updatedAT DATETIME,
 FOREIGN KEY (user_id) REFERENCES users(username),
 PRIMARY KEY (id))
