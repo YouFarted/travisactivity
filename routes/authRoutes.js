@@ -3,7 +3,6 @@ const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
 
-
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
@@ -11,7 +10,7 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
   // Sending back a password, even a hashed password, isn't a good idea
   res.json({
     email: req.user.email,
-    id: req.user.id
+    id: req.user.id,
   });
 });
 
@@ -20,13 +19,20 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // otherwise send back an error
 router.post("/api/signup", (req, res) => {
   db.User.create({
+    username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    aboutMe: req.body.aboutMe,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    age: req.body.age,
+    gender: req.body.gender,
+    hobbies: req.body.hobbies,
+    password: req.body.password,
   })
     .then(() => {
       res.redirect(307, "/api/login");
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(401).json(err);
     });
 });
@@ -47,7 +53,7 @@ router.get("/api/user_data", (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
-      id: req.user.id
+      id: req.user.id,
     });
   }
 });
