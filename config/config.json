@@ -2,14 +2,14 @@
   "development": {
     "username": "root",
     "password": "Galaxy@123",
-    "database": "passport_demo",
+    "database": "dating_app",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "Galaxy@123",
-    "database": "database_test",
+    "database": "dating_app",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

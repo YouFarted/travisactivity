@@ -13,7 +13,7 @@ if (args.length === 1 && args[0] === "seed") {
 }
 
 if (doOnlySeeding) {
-  require("./lib/databaseSeed")();
+  require("./lib/databaseSeed")().catch(e => console.error(e));
 } else {
   // Requiring passport as we've configured it
   const passport = require("./config/passport");
