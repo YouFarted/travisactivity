@@ -5,6 +5,7 @@ branches:
   only:
     - master
     - main
+    - AEO
 cache:
   directories:
     - node_modules
