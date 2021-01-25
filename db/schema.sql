@@ -1,9 +1,13 @@
-DROP DATABASE IF EXISTS dating_app;
-CREATE DATABASE dating_app;
+-- this assumes the database dating_app already exists and we're running
+-- in a connection alreading using it.
 
-USE dating_app;
+DROP TABLE IF EXISTS photos;
+DROP TABLE IF EXISTS addresses;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
+id INT NOT NULL AUTO_INCREMENT,
 username VARCHAR (30) NOT NULL,
 email VARCHAR (50) NOT NULL,
 aboutMe VARCHAR (255),
@@ -30,6 +34,7 @@ PRIMARY KEY (id),
 FOREIGN KEY (sendingUser_id) REFERENCES users(username),
 FOREIGN KEY (receivingUser_id) REFERENCES users(username));
 
+
 CREATE TABLE addresses (
 id INT NOT NULL AUTO_INCREMENT,
 street VARCHAR (150) NOT NULL,
@@ -41,6 +46,7 @@ createdAt DATETIME,
 updatedAT DATETIME,
 PRIMARY KEY (id),
 FOREIGN KEY (user_id) REFERENCES users(username));
+
 
 CREATE TABLE photos (
 id INT NOT NULL AUTO_INCREMENT,

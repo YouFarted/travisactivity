@@ -1,5 +1,6 @@
+-- this assumes the database dating_app already exists and we're running
+-- in a connection alreading using it.
 /* not finished */
-USE dating_app;
 
 INSERT INTO users
 (username, email, aboutMe, firstName, lastName, age, gender, hobbies, password)
