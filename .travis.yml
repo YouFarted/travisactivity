@@ -6,6 +6,7 @@ branches:
     - master
     - main
     - AEO
+    - MBO
 cache:
   directories:
     - node_modules
