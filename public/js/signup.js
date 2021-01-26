@@ -24,7 +24,7 @@ $(document).ready(() => {
   );
 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("submit", (event) => {
+  signUpForm.on("submit", event => {
     event.preventDefault();
     const userData = {
       username: usernameInput.val().trim(),
@@ -35,7 +35,7 @@ $(document).ready(() => {
       age: ageInput.val().trim(),
       gender: genderInput.val().trim(),
       hobbies: hobbiesInput.val(),
-      password: passwordInput.val().trim(),
+      password: passwordInput.val().trim()
     };
 
     if (!userData.email || !userData.password) {
@@ -88,7 +88,7 @@ $(document).ready(() => {
       age: age,
       gender: gender,
       hobbies: hobbies,
-      password: password,
+      password: password
     })
       .then(() => {
         window.location.replace("/members");

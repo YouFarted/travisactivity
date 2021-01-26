@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(30),
       allowNull: false,
       unique: true,
-      primaryKey: true,
+      primaryKey: true
     },
     // The email cannot be null, and must be a proper email before creation
     email: {
@@ -16,44 +16,44 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true,
-      },
+        isEmail: true
+      }
     },
     aboutMe: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true
     },
     firstName: {
       type: DataTypes.STRING(50),
       allowNull: false,
-      unique: true,
+      unique: true
     },
     lastName: {
       type: DataTypes.STRING(50),
       allowNull: false,
-      unique: true,
+      unique: true
     },
     age: {
       type: DataTypes.INTEGER(3),
       allowNull: false,
-      unique: true,
+      unique: true
     },
     gender: {
       type: DataTypes.STRING(10),
       allowNull: false,
-      unique: true,
+      unique: true
     },
     hobbies: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true
     },
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
@@ -61,7 +61,7 @@ module.exports = function(sequelize, DataTypes) {
   };
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
-  User.addHook("beforeCreate", (user) => {
+  User.addHook("beforeCreate", user => {
     user.password = bcrypt.hashSync(
       user.password,
       bcrypt.genSaltSync(10),
