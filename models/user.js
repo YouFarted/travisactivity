@@ -10,6 +10,11 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       primaryKey: true
     },
+    isDeveloper: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
     // The email cannot be null, and must be a proper email before creation
     email: {
       type: DataTypes.STRING(50),

@@ -6,10 +6,13 @@ INSERT INTO users
 (username, email, aboutMe, firstName, lastName, age, gender, hobbies, password)
 values('SomeGuy1', 'someguy1@gmail.com', 'I do things', 'Some', 'Guy', 20, 'Male', 'doing stuff', 'password1234'),
 ('SomeGal1', 'somegal1@gmail.com', 'I do more things', 'Some', 'Gal', 22, 'Female', 'doing all stuff', 'password555'),
-('SomeGal2', 'somegal2@gmail.com', 'I do all things', 'Some', 'Gal', 29, 'Female', 'doing more things', 'password111'),
-('yetanotherguy', 'yetanotherguy@gmail.com', 'blahblahblah', 'Another', 'Guy', 1234, 'Male', 'picking my bellybutton and sniffing it', '$2a$10$hu2/j4Iyyp7MTs52B3XuVO3TzujkeJFjPSy8YFklChaejUJc1YYJ6');
+('SomeGal2', 'somegal2@gmail.com', 'I do all things', 'Some', 'Gal', 29, 'Female', 'doing more things', 'password111');
+
 -- The password for yetanotherguy is a salted&encrypted 'password1234'
 
+INSERT INTO users
+(username, isDeveloper, email, aboutMe, firstName, lastName, age, gender, hobbies, password)
+values('yetanotherguy', 1, 'yetanotherguy@gmail.com', 'blahblahblah', 'Another', 'Guy', 1234, 'Male', 'picking my bellybutton and sniffing it', '$2a$10$hu2/j4Iyyp7MTs52B3XuVO3TzujkeJFjPSy8YFklChaejUJc1YYJ6');
 
 INSERT INTO messages
 (subject, body, sendingUser_id, receivingUser_id)
