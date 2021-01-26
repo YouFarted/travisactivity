@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
-    const login = $();
-    const signup = $();
+    const login = $("#login");
+    const signup = $("#signup");
     const 
 
 });
