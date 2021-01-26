@@ -10,6 +10,10 @@ body {
     margin-top: 0.97rem;
 }
 
+#search-bar {
+    width: 33%
+}
+
 @media (min-width: 992px) {
     .gedf-main {
         padding-left: 4rem;
