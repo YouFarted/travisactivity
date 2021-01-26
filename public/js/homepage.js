@@ -15,6 +15,4 @@ $(document).ready(() => {
     event.preventDefault();
     window.location.href = "/signup";
   });
-
-  
 });
