@@ -10,9 +10,11 @@ $(document).ready(() => {
     window.location.href = "/login";
   });
 
-// When signup button is clicked USER is redirected to signup page
+  // When signup button is clicked USER is redirected to signup page
   signup.click(event => {
     event.preventDefault();
     window.location.href = "/signup";
   });
+
+  
 });

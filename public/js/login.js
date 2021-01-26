@@ -35,7 +35,5 @@ $(document).ready(() => {
       .catch(err => {
         console.log(err);
       });
-    var this_is_a_bad_var = 1;
-    var this_is_a_bad_var = 2;
   }
 });

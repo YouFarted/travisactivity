@@ -3,14 +3,50 @@ const bcrypt = require("bcryptjs");
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
   const User = sequelize.define("User", {
+    // This will be the unique id
+    username: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      unique: true,
+      primaryKey: true
+    },
+    isDeveloper: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
     // The email cannot be null, and must be a proper email before creation
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
       unique: true,
       validate: {
         isEmail: true
       }
+    },
+    aboutMe: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    firstName: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    gender: {
+      type: DataTypes.STRING(10),
+      allowNull: false
+    },
+    hobbies: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     // The password cannot be null
     password: {

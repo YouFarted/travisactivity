@@ -19,7 +19,14 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // otherwise send back an error
 router.post("/api/signup", (req, res) => {
   db.User.create({
+    username: req.body.username,
     email: req.body.email,
+    aboutMe: req.body.aboutMe,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    age: req.body.age,
+    gender: req.body.gender,
+    hobbies: req.body.hobbies,
     password: req.body.password
   })
     .then(() => {
@@ -32,6 +39,7 @@ router.post("/api/signup", (req, res) => {
 
 // Route for logging user out
 router.get("/logout", (req, res) => {
+  req.session.destroy();
   req.logout();
   res.redirect("/");
 });
@@ -48,6 +56,20 @@ router.get("/api/user_data", (req, res) => {
       email: req.user.email,
       id: req.user.id
     });
+  }
+});
+
+router.get("/api/dev/runSeeds", (req, res) => {
+  if (!req.user || !req.user.isDeveloper) {
+    // The user is not logged in, send back an empty object
+    console.log(
+      "User is either not logged in or is not a developer.  Reseeding is a developer feature."
+    );
+    res.status(404).json({});
+  } else {
+    // run the reseed.
+    require("../lib/databaseSeed")().catch(e => console.error(e));
+    res.json({ reseeding: true });
   }
 });
 
