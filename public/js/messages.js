@@ -19,26 +19,29 @@ $(document).ready(() => {
   sendMsgBtn.addEventListener("click", event => {
     console.log("inside the on submit");
     event.preventDefault();
-    const newMsgData = {
-      // subject: currentSubject.val(),
-      // body: currentBody.val(),
-      subject: currentSubject,
-      body: currentBody,
-      sendingUser_id: "SomeGuy1",
-      receivingUser_id: "SomeGal1"
-    };
+    $.get("/api/user_data", user => {
+      console.log(JSON.stringify(user));
+      const newMsgData = {
+        // subject: currentSubject.val(),
+        // body: currentBody.val(),
+        subject: currentSubject,
+        body: currentBody,
+        sendingUser_id: user.username,
+        receivingUser_id: "SomeGal1"
+      };
 
-    if (!newMsgData.subject || !newMsgData.body) {
-      return;
-    }
-    console.log("this is before calling sendmessage");
-    // If we have an email a subject and body, run the sendMessage function
-    sendMessage(
-      newMsgData.subject,
-      newMsgData.body,
-      newMsgData.sendingUser_id,
-      newMsgData.receivingUser_id
-    );
+      if (!newMsgData.subject || !newMsgData.body) {
+        return;
+      }
+      console.log("this is before calling sendmessage");
+      // If we have an email a subject and body, run the sendMessage function
+      sendMessage(
+        newMsgData.subject,
+        newMsgData.body,
+        newMsgData.sendingUser_id,
+        newMsgData.receivingUser_id
+      );
+    });
 
     // subjectInput.val("");
     // bodyInput.val("");
