@@ -6,11 +6,11 @@ branches:
     - master
     - main
     - AEO
+    - brian
 cache:
   directories:
     - node_modules
 services:
-   - mysql
+  - mysql
 before_install:
-   - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS testdb;'
-
+  - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS testdb;'

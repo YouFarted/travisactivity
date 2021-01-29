@@ -37,8 +37,9 @@ if (doOnlySeeding) {
 
   const authRoutes = require("./routes/authRoutes");
   const htmlRoutes = require("./routes/htmlRoutes");
+  const msgRoutes = require("./routes/msgRoutes");
 
-  app.use(authRoutes, htmlRoutes);
+  app.use(authRoutes, htmlRoutes, msgRoutes);
 
   // Syncing our database and logging a message to the user upon success
   db.sequelize.sync().then(() => {
