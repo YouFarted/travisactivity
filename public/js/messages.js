@@ -6,10 +6,7 @@ $(document).ready(() => {
   //get elements on the html page and assign as variables
   const messageList = document.getElementById("messages");
   const subjectInput = document.getElementById("subject-input");
-  const bodyInput = document.getElementById("body-input");
   const sendMsgBtn = document.getElementById("send-button");
-  const currentSubject = "asdf";
-  const currentBody = "asdf1";
 
   // When the send button is clicked, we validate the subject and body are not blank
   sendMsgForm.on("submit", event => {
@@ -17,17 +14,17 @@ $(document).ready(() => {
   });
 
   sendMsgBtn.addEventListener("click", event => {
-    console.log("inside the on submit");
+    const recievingUserInput = $("#receiving-user-input");
+    const currentSubject = $("#subject-input");
+    const currentBody = $("#body-input");
     event.preventDefault();
+
     $.get("/api/user_data", user => {
-      console.log(JSON.stringify(user));
       const newMsgData = {
-        // subject: currentSubject.val(),
-        // body: currentBody.val(),
-        subject: currentSubject,
-        body: currentBody,
+        subject: currentSubject.val(),
+        body: currentBody.val(),
         sendingUser_id: user.username,
-        receivingUser_id: "SomeGal1"
+        receivingUser_id: recievingUserInput.val()
       };
 
       if (!newMsgData.subject || !newMsgData.body) {
@@ -42,9 +39,6 @@ $(document).ready(() => {
         newMsgData.receivingUser_id
       );
     });
-
-    // subjectInput.val("");
-    // bodyInput.val("");
   });
 
   // Does a post to the sendMessage route. If successful, it reloads the page
@@ -58,9 +52,8 @@ $(document).ready(() => {
       receivingUser_id: receivingUser_id
     })
       .then(() => {
-        //I believe this'll work?
-        // window.location.reload();
-        // If there's an error, handle it by throwing up a bootstrap alert
+        //clears out the values
+        window.location.reload();
       })
       .catch(handleMessageError);
   }

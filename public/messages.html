@@ -26,21 +26,17 @@
     Send Message
     <form class="send-msg-form">
         <div class="form-group">
-            <label for="sending-user-label">Sending Username</label>
-            <input type="text" id="sending-user-input">
-        </div>
-        <div class="form-group">
             <label for="receiving-user-label">Receiving Username</label>
-            <input type="text" id="receiving-user-input">
+            <input type="text" id="receiving-user-input" name="receiving-user-input">
         </div>
         <div class="form-group">
             <label for="subject-label">Subject</label>
-            <input type="text" id="subject-input">
+            <input type="text" id="subject-input" name="subject-input">
         </div>
         <div class="form-group">
             <label for="subject-label">Body</label>
-            <textarea rows="4" id="body-input"></textarea><br>
-            <button type="submit" id="send-button">Send</button>
+            <textarea class="body-input" rows="4" id="body-input" name="body-input"></textarea><br>
+            <button type="submit" id="send-button" name="send-button">Send</button>
         </div>
     </form>
     <!--do we need this line?-->
@@ -51,9 +47,9 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="js/messages.js"></script>
 
 </body>
-
 
 </html>
