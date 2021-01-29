@@ -53,6 +53,7 @@ router.get("/api/user_data", (req, res) => {
     // Otherwise send back the user's email and id
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
+      username: req.user.username,
       email: req.user.email,
       id: req.user.id
     });
@@ -68,7 +69,9 @@ router.get("/api/dev/runSeeds", (req, res) => {
     res.status(404).json({});
   } else {
     // run the reseed.
-    require("../lib/databaseSeed")().catch(e => console.error(e));
+    require("../lib/databaseSeed")()
+      .then(result => res.json({ reseedingSuccuss: result }))
+      .catch(e => res.json({ reseedingFail: e }));
     res.json({ reseeding: true });
   }
 });
