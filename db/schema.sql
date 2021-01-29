@@ -25,13 +25,13 @@ CREATE TABLE messages (
 id INT NOT NULL AUTO_INCREMENT,
 subject VARCHAR (50) NOT NULL,
 body VARCHAR (255) NOT NULL,
-sendingUser_id VARCHAR (30) NOT NULL,
-receivingUser_id VARCHAR (30) NOT NULL,
+sendingUserId VARCHAR (30) NOT NULL,
+receivingUserId VARCHAR (30) NOT NULL,
 createdAt DATETIME,
 updatedAT DATETIME,
 PRIMARY KEY (id),
-FOREIGN KEY (sendingUser_id) REFERENCES users(username),
-FOREIGN KEY (receivingUser_id) REFERENCES users(username));
+FOREIGN KEY (sendingUserId) REFERENCES users(username),
+FOREIGN KEY (receivingUserId) REFERENCES users(username));
 
 
 CREATE TABLE addresses (
