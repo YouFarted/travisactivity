@@ -48,6 +48,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    profileImagePath: {
+      type: DataTypes.STRING
+    },
     // The password cannot be null
     password: {
       type: DataTypes.STRING,

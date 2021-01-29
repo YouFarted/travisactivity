@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 $(document).ready(() => {
   // Getting references to our form and input
   console.log("the start of the page");
@@ -26,7 +27,9 @@ $(document).ready(() => {
         // body: currentBody.val(),
         subject: currentSubject,
         body: currentBody,
+        // eslint-disable-next-line camelcase
         sendingUser_id: user.username,
+        // eslint-disable-next-line camelcase
         receivingUser_id: "SomeGal1"
       };
 
@@ -49,12 +52,15 @@ $(document).ready(() => {
 
   // Does a post to the sendMessage route. If successful, it reloads the page
   // Otherwise we log any errors
+  // eslint-disable-next-line camelcase
   function sendMessage(subject, body, sendingUser_id, receivingUser_id) {
     console.log("this is after it enters send message");
     $.post("/api/messages", {
       subject: subject,
       body: body,
+      // eslint-disable-next-line camelcase
       sendingUser_id: sendingUser_id,
+      // eslint-disable-next-line camelcase
       receivingUser_id: receivingUser_id
     })
       .then(() => {

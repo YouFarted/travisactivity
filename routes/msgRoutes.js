@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const router = require("express").Router();
+// eslint-disable-next-line no-unused-vars
 const passport = require("../config/passport");
 
 // Using the passport.authenticate middleware with our local strategy.
@@ -22,7 +23,9 @@ router.post("/api/messages", (req, res) => {
   db.Message.create({
     subject: req.body.subject,
     body: req.body.body,
+    // eslint-disable-next-line camelcase
     sendingUser_id: req.body.sendingUser_id,
+    // eslint-disable-next-line camelcase
     receivingUser_id: req.body.receivingUser_id
   })
     .then(dbMessage => {
