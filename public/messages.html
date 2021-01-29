@@ -12,23 +12,25 @@
 </head>
 
 <body>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Dropdown button
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu" id="username-input" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">Something else here</a> 
         </div>
+    </div> -->
+    <div>
+        <label for="username-input" default="please select">Send To</label>
+        <select id="username-input">
+            <option>Please select</option>
     </div>
-    Send Message
+    </select>
+
     <form class="send-msg-form">
-        <div class="form-group">
-            <label for="receiving-user-label">Receiving Username</label>
-            <input type="text" id="receiving-user-input" name="receiving-user-input">
-        </div>
         <div class="form-group">
             <label for="subject-label">Subject</label>
             <input type="text" id="subject-input" name="subject-input">
@@ -43,10 +45,13 @@
     <!-- <script defer src="./messages.html"></script> -->
 
     List of all messages:
-    <div id="messages"></div>
+    <input type="text" class="message-list" id="message-list"></input>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="js/messages.js"></script>
 

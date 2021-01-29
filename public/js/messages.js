@@ -1,4 +1,25 @@
+// import "bootstrap/dist/js/bootstrap.bundle";
+
 $(document).ready(() => {
+  //grab all of the usernames so we can render into the dropdown list
+  $.get("/api/messages").then(data => {
+    $(".message-list").text(data.username);
+    const mySelect = $("#username-input");
+    data.forEach(element => {
+      console.log(element.username);
+
+      mySelect.append(
+        $(
+          "<option id=" +
+            element.username +
+            ">" +
+            element.username +
+            "</option> "
+        )
+      );
+    });
+  });
+
   // Getting references to our form and input
   console.log("the start of the page");
   const sendMsgForm = $("send-msg-form");
@@ -14,17 +35,22 @@ $(document).ready(() => {
   });
 
   sendMsgBtn.addEventListener("click", event => {
-    const recievingUserInput = $("#receiving-user-input");
+    //later, add validation to prevent click when 'please select' is selected
+    const recievingUserSelect = $("#username-input");
     const currentSubject = $("#subject-input");
     const currentBody = $("#body-input");
     event.preventDefault();
+
+    $.get("/api/user_data").then(data => {
+      $(".member-name").text(data.email);
+    });
 
     $.get("/api/user_data", user => {
       const newMsgData = {
         subject: currentSubject.val(),
         body: currentBody.val(),
         sendingUser_id: user.username,
-        receivingUser_id: recievingUserInput.val()
+        receivingUser_id: recievingUserSelect.val()
       };
 
       if (!newMsgData.subject || !newMsgData.body) {
@@ -44,6 +70,7 @@ $(document).ready(() => {
   // Does a post to the sendMessage route. If successful, it reloads the page
   // Otherwise we log any errors
   function sendMessage(subject, body, sendingUser_id, receivingUser_id) {
+    console.log("test: ", $("#username-input option:selected").text());
     console.log("this is after it enters send message");
     $.post("/api/messages", {
       subject: subject,
