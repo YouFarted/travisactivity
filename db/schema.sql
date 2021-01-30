@@ -2,8 +2,11 @@
 -- in a connection alreading using it.
 
 DROP TABLE IF EXISTS photos;
+
 DROP TABLE IF EXISTS addresses;
+
 DROP TABLE IF EXISTS messages;
+
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
