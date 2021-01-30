@@ -1,32 +1,14 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const router = require("express").Router();
-// eslint-disable-next-line no-unused-vars
-const passport = require("../config/passport");
 
-// Using the passport.authenticate middleware with our local strategy.
-// If the user has valid login credentials, send them to the members page.
-// Otherwise the user will be sent an error
-// router.post("/api/login", passport.authenticate("local"), (req, res) => {
-//   // Sending back a password, even a hashed password, isn't a good idea
-//   res.json({
-//     email: req.user.email,
-//     id: req.user.id
-//   });
-// });
-
-// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-// otherwise send back an error
 router.post("/api/messages", (req, res) => {
   console.log("anything");
   db.Message.create({
     subject: req.body.subject,
     body: req.body.body,
-    // eslint-disable-next-line camelcase
-    sendingUser_id: req.body.sendingUser_id,
-    // eslint-disable-next-line camelcase
-    receivingUser_id: req.body.receivingUser_id
+    sendingUserId: req.body.sendingUserId,
+    receivingUserId: req.body.receivingUserId
   })
     .then(dbMessage => {
       console.log(dbMessage);
@@ -37,5 +19,16 @@ router.post("/api/messages", (req, res) => {
       res.status(401).json(err);
     });
 });
+
+router.get("/api/messages", (req, res) => {
+  console.log("all the users!");
+  db.User.findAll({
+    attributes: ["username"]
+  }).then(dbUser => {
+    res.json(dbUser);
+  });
+});
+
+//respond res.json with array object.
 
 module.exports = router;

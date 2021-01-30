@@ -11,6 +11,14 @@ router.get("/", (req, res) => {
   if (req.user) {
     res.redirect("/members");
   }
+  res.sendFile(path.join(__dirname, "../public/homepage.html"));
+});
+
+router.get("/signup", (req, res) => {
+  // If the user already has an account send them to the members page
+  if (req.user) {
+    res.redirect("/members");
+  }
   res.sendFile(path.join(__dirname, "../public/signup.html"));
 });
 

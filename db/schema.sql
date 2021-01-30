@@ -26,13 +26,13 @@ CREATE TABLE Messages (
 id INT NOT NULL AUTO_INCREMENT,
 subject VARCHAR (50) NOT NULL,
 body VARCHAR (255) NOT NULL,
-sendingUser_id VARCHAR (30) NOT NULL,
-receivingUser_id VARCHAR (30) NOT NULL,
+sendingUserId VARCHAR (30) NOT NULL,
+receivingUserId VARCHAR (30) NOT NULL,
 createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updatedAT DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
-FOREIGN KEY (sendingUser_id) REFERENCES Users(username),
-FOREIGN KEY (receivingUser_id) REFERENCES Users(username));
+FOREIGN KEY (sendingUserId) REFERENCES Users(username),
+FOREIGN KEY (receivingUserId) REFERENCES Users(username));
 
 
 CREATE TABLE Addresses (
