@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Messages</title>
@@ -10,13 +11,13 @@
 </head>
 
 <body>
+    <a href="/">Back to Members Page</a>
     <div>
         <label for="username-input" default="please select">Send To</label>
         <select id="username-input">
             <option>Please select</option>
+        </select>
     </div>
-    </select>
-
     <form class="send-msg-form">
         <div class="form-group">
             <label for="subject-label">Subject</label>
@@ -29,8 +30,23 @@
         </div>
     </form>
 
-    List of all messages:
-    <input type="text" class="message-list" id="message-list"></input>
+    <h2>All my Messages</h2>
+    <!-- <input type="text" class="message-list" id="message-list"></input> -->
+    <table class="message-list" id="message-list">
+        <tr>
+            <th>Sent</th>
+            <th>Sending User </th>
+            <th>Receiving User </th>
+            <th>Subject User </th>
+            <th>Body</th>
+        </tr>
+        <tr>
+
+        </tr>
+
+    </table>
+
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -41,4 +57,5 @@
     <script type="text/javascript" src="js/messages.js"></script>
 
 </body>
+
 </html>
