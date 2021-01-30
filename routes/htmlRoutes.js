@@ -71,41 +71,41 @@ router.get("/profiles/:username", isAuthenticated, (req, res) => {
       );
       console.dir(dbProfileOfUserWeAreLookingAt);
       const profileData = dbProfileOfUserWeAreLookingAt.dataValues;
-      profileData.layout = "index";
+      profileData.layout = "main";
       profileData.areTheyLookingAtTheirOwnProfile =
         profileData.username === sessionUser.username;
       if (profileData.profileImagePath === null) {
         profileData.profileImagePath = "whoknows.webp";
       }
-      res.render("main", profileData);
+      res.render("index", profileData);
     });
   }
 });
 
 //-----
 //Cloned code for messages route. Commenting this out for now as it's erroring. Once stable, I want to use handlbars
-// router.get("/my-messages", isAuthenticated, (req, res) => {
-//   const sessionUser = req.user;
-//   if (!sessionUser) {
-//     res
-//       .status(404)
-//       .json({ error: "you need to be logged in to see any profiles." });
-//   } else {
-//     const usernameToLookAt = req.params.username;
-//     console.log(`The url wants a user named ${usernameToLookAt}`);
-//     db.User.findAll({
-//       where: {
-//         username: usernameToLookAt
-//       }
-//     }).then(dbAllMyMessages => {
-//       console.log("dbAllMyMessages.username: " + dbAllMyMessages.username);
-//       console.dir(dbAllMyMessages);
-//       const messageData = dbAllMyMessages.dataValues;
-//       messageData.layout = "index";
-//       res.render("messages1", messageData);
-//     });
-//   }
-// });
+router.get("/my-messages/:username", isAuthenticated, (req, res) => {
+  const sessionUser = req.user;
+  if (!sessionUser) {
+    res
+      .status(404)
+      .json({ error: "you need to be logged in to see any profiles." });
+  } else {
+    const messageUsername = req.params.username;
+    console.log(`The url wants a user named ${messageUsername}`);
+    db.Message.findOne({
+      where: {
+        sendingUserId: messageUsername
+      }
+    }).then(dbAllMyMessages => {
+      console.log("dbAllMyMessages.sendingUserId: " + dbAllMyMessages.username);
+      console.dir(dbAllMyMessages);
+      const messageData = dbAllMyMessages.dataValues;
+      messageData.layout = "main";
+      res.render("messages1", messageData);
+    });
+  }
+});
 
 router.get("/messages", isAuthenticated, (req, res) => {
   if (req.user) {

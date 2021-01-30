@@ -1,43 +1,33 @@
 <body>
-    
-    {{#if areTheyLookingAtTheirOwnProfile}}
+
+    {{!-- {{#if areTheyLookingAtTheirOwnProfile}}
     <form action="/api/profileImageUpload" method="post" enctype="multipart/form-data">
         <span>Change profile picture:</span>
         <input type="file" id="myImage" name="myImage">
         <button type="submit" id="submitPhoto" name="submitPhoto">Submit Photo</button>
     </form>
     {{/if}}
-    <image style="max-width: 500px" id="image" src="/userimages/{{profileImagePath}}"></image>
-    
+    <image style="max-width: 500px" id="image" src="/userimages/{{profileImagePath}}"></image> --}}
+    Messages
     <table>
+
         <tr>
-            <td>Username:</td>
-            <td>{{username}}</td>
+            <td>Sending User:</td>
+            <td>{{sendingUserId}}</td>
         </tr>
         <tr>
-            <td>First Name:</td>
-            <td>{{firstName}}</td>
+            <td>Receiving User:</td>
+            <td>{{receivingUserId}}</td>
         </tr>
         <tr>
-            <td>Last name:</td>
-            <td>{{lastName}}</td>
+            <td>Subject:</td>
+            <td>{{subject}}</td>
         </tr>
         <tr>
-            <td>Age:</td>
-            <td>{{age}}</td>
+            <td>Body:</td>
+            <td>{{body}}</td>
         </tr>
-        <tr>
-            <td>Gender:</td>
-            <td>{{gender}}</td>
-        </tr>
-        <tr>
-            <td>About Me:</td>
-            <td>{{aboutMe}}</td>
-        </tr>
-        <tr>
-            <td>Hobbies:</td>
-            <td>{{hobbies}}</td>
-        </tr>
+
     </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
