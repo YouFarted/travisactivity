@@ -2,6 +2,7 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
 const router = require("express").Router();
+const db = require("../models");
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -10,16 +11,18 @@ router.get("/", (req, res) => {
   // If the user already has an account send them to the members page
   if (req.user) {
     res.redirect("/members");
+  } else {
+    res.sendFile(path.join(__dirname, "../public/homepage.html"));
   }
-  res.sendFile(path.join(__dirname, "../public/homepage.html"));
 });
 
 router.get("/signup", (req, res) => {
   // If the user already has an account send them to the members page
   if (req.user) {
     res.redirect("/members");
+  } else {
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
   }
-  res.sendFile(path.join(__dirname, "../public/signup.html"));
 });
 
 router.get("/login", (req, res) => {
@@ -43,6 +46,31 @@ router.get("/members", isAuthenticated, (req, res) => {
     res.redirect("/developers");
   } else {
     res.sendFile(path.join(__dirname, "../public/members.html"));
+  }
+});
+
+router.get("/profiles/:username", isAuthenticated, (req, res) => {
+  const sessionUser = req.user;
+  if (!sessionUser) {
+    res.status(404).json({error: "you need to be logged in to see any profiles."});
+  } else {
+    const usernameToLookAt = req.params.username;
+    console.log(`The url wants a user named ${usernameToLookAt}`);
+    db.User.findOne({
+      where: {
+        username: usernameToLookAt
+      }
+    }).then(dbProfileOfUserWeAreLookingAt => {
+      console.log("dbProfileOfUserWeAreLookingAt.username: " + dbProfileOfUserWeAreLookingAt.username );
+      console.dir(dbProfileOfUserWeAreLookingAt);
+      const profileData = dbProfileOfUserWeAreLookingAt.dataValues;
+      profileData.layout = "index";
+      profileData.areTheyLookingAtTheirOwnProfile = (profileData.username === sessionUser.username );
+      if (profileData.profileImagePath === null) {
+        profileData.profileImagePath = "whoknows.webp";
+      }
+      res.render("main", profileData);
+    });
   }
 });
 

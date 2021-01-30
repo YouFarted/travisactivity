@@ -1,7 +1,25 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 const router = require("express").Router();
 const passport = require("../config/passport");
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/gif"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({ dest: "uploads", fileFilter: fileFilter });
+const type = upload.single("myImage");
 
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
@@ -54,8 +72,66 @@ router.get("/api/user_data", (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       username: req.user.username,
+      image: req.user.profileImagePath,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      aboutMe: req.user.aboutMe,
+      age: req.user.age,
+      gender: req.user.gender,
+      hobbies: req.user.hobbies,
+      whenJoined: req.user.createdAt,
       email: req.user.email,
       id: req.user.id
+    });
+  }
+});
+
+router.post("/api/profileImageUpload", type, (req, res) => {
+  console.log("great!");
+  if (!req.user) {
+    res.json({});
+  } else if (!req.file) {
+    res.redirect("/profiles/" + req.user.username);
+  } else {
+    const tmpPath = req.file.path;
+    let ext = null;
+
+    const mimeSplitWack = req.file.mimetype.split("/");
+
+    if (mimeSplitWack.length === 2 && mimeSplitWack[0] === "image") {
+      ext += "." + mimeSplitWack[1];
+    }
+
+    let basenameWithoutExtension = "";
+    const splitBasename = path.basename(req.file.path).split(".");
+    if (splitBasename.length === 1) {
+      basenameWithoutExtension = splitBasename[0];
+    } else if (splitBasename.length === 2) {
+      basenameWithoutExtension = splitBasename[0];
+    }
+
+    const savedFilename = basenameWithoutExtension + ext;
+    const targetFilePath = "public/userimages/" + savedFilename;
+    console.log("new web file at: " + targetFilePath);
+
+    fs.rename(tmpPath, targetFilePath, err => {
+      if (err) {
+        res.end("error: " + err); //TODO
+      } else {
+        db.User.findOne({
+          where: {
+            email: req.user.email
+          }
+        }).then(dbUser => {
+          dbUser.update({
+            profileImagePath: savedFilename
+          });
+          // this updates the loaded user in the session for when this is reused within the current session.
+          req.user.profileImagePath = savedFilename;
+          // after the file uploads, refresh this user's profile page which is where they must be to tripper the file upload
+          res.redirect("/profiles/" + req.user.username);
+        });
+      }
     });
   }
 });
