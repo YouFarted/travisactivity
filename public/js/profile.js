@@ -16,7 +16,7 @@ $(document).ready(() => {
 
   function loadAjaxPageData() {
     console.log("inside the load");
-    $.get("/api/user_data", (user) => {
+    $.get("/api/user_data", user => {
       console.log(JSON.stringify(user));
       if (user.image === null) {
         imageImg.setAttribute("src", "/userimages/whoknows.webp");
