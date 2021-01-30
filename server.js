@@ -2,9 +2,14 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+
+const handlebars = require("express-handlebars");
+
+/*
 const handlebars = require("express-handlebars").create({
   defaultLayout: "main"
 });
+*/
 
 let doOnlySeeding = false;
 
@@ -38,11 +43,17 @@ if (doOnlySeeding) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.engine("handlebars", handlebars.engine);
+  //app.engine("handlebars", handlebars.engine);
+  /*  app.engine('handlebars', handlebars({
+    layoutsDir: __dirname + '/views/layouts',
+    }));*/
 
   const authRoutes = require("./routes/authRoutes");
   const htmlRoutes = require("./routes/htmlRoutes");
   const msgRoutes = require("./routes/msgRoutes");
+
+  app.engine("handlebars", handlebars({ defaultLayout: "main" }));
+  app.set("view engine", "handlebars");
 
   app.use(authRoutes, htmlRoutes, msgRoutes);
 

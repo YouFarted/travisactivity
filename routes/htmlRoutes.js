@@ -2,6 +2,7 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
 const router = require("express").Router();
+const db = require("../models");
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -10,16 +11,18 @@ router.get("/", (req, res) => {
   // If the user already has an account send them to the members page
   if (req.user) {
     res.redirect("/members");
+  } else {
+    res.sendFile(path.join(__dirname, "../public/homepage.html"));
   }
-  res.sendFile(path.join(__dirname, "../public/homepage.html"));
 });
 
 router.get("/signup", (req, res) => {
   // If the user already has an account send them to the members page
   if (req.user) {
     res.redirect("/members");
+  } else {
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
   }
-  res.sendFile(path.join(__dirname, "../public/signup.html"));
 });
 
 router.get("/login", (req, res) => {
@@ -43,6 +46,28 @@ router.get("/members", isAuthenticated, (req, res) => {
     res.redirect("/developers");
   } else {
     res.sendFile(path.join(__dirname, "../public/members.html"));
+  }
+});
+
+router.get("/profiles/:username", isAuthenticated, (req, res) => {
+  if (!req.user) {
+    res.status(404).json({error: "you need to be logged in to see any profiles."});
+  } else {
+    //!!!!
+    // get the user from the db that matches username
+    const usernameToLookAt = req.params.username;
+    console.log(`The url wants a user named ${usernameToLookAt}`);
+    db.User.findOne({
+      where: {
+        username: usernameToLookAt
+      }
+    }).then(dbUser => {
+      console.log("dbUser.username: " + dbUser.username );
+      console.dir(dbUser);
+      //dbUser.layout = 'index';
+      res.render("main", dbUser);
+      //res.render('main', {layout: 'index', username: dbUser.username});
+    });
   }
 });
 
