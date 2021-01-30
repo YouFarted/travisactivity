@@ -6,7 +6,6 @@ const user = require("../models/user");
 const { Op } = require("sequelize");
 
 router.post("/api/messages", (req, res) => {
-  console.log("anything");
   db.Message.create({
     subject: req.body.subject,
     body: req.body.body,
@@ -14,9 +13,7 @@ router.post("/api/messages", (req, res) => {
     receivingUserId: req.body.receivingUserId
   })
     .then(dbMessage => {
-      console.log(dbMessage);
       res.json(dbMessage);
-      //   res.redirect(307, "/api/login");
     })
     .catch(err => {
       res.status(401).json(err);
@@ -24,7 +21,6 @@ router.post("/api/messages", (req, res) => {
 });
 
 router.get("/api/messages", (req, res) => {
-  console.log("all the users!");
   db.User.findAll({
     attributes: ["username"]
   }).then(dbUser => {
@@ -33,11 +29,14 @@ router.get("/api/messages", (req, res) => {
 });
 
 router.get("/api/myMessages", (req, res) => {
-  console.log("all the messages!");
-  //   console.log(req.params);
-  //   console.log(User);
   db.Message.findAll({
-    attributes: ["sendingUserId", "receivingUserId", "subject", "body"],
+    attributes: [
+      "createdAt",
+      "sendingUserId",
+      "receivingUserId",
+      "subject",
+      "body"
+    ],
     where: {
       [Op.or]: [
         { sendingUserId: "yetanotherguy" },

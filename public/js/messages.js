@@ -23,36 +23,32 @@ $(document).ready(() => {
     });
   });
 
-  //grab all of the messages so we can render into the page using HANDLEBARS
-  $.get("/api/myMessages").then(data => {
-    $(".message-list").text(data);
-    // const mySelect = $("#username-input");
-    data.forEach(element => {
-      console.log(element);
+  const messageListEl = $(".message-list");
 
-      // mySelect.append(
-      //   $(
-      //     "<option id=" +
-      //       element.username +
-      //       ">" +
-      //       element.username +
-      //       "</option> "
-      //   )
-      // );
+  //grab all of the messages so we can render into the page. Use handlebars later
+  $.get("/api/myMessages").then(data => {
+    data.forEach(element => {
+      const newRow = $(
+        "<tr><td>" +
+          element.createdAt +
+          "</td><td>" +
+          element.sendingUserId +
+          "</td><td>" +
+          element.receivingUserId +
+          "</td><td>" +
+          element.subject +
+          "</td><td>" +
+          element.body +
+          "</td></tr>"
+      );
+      messageListEl.append(newRow);
     });
   });
 
   // Getting references to our form and input
-  console.log("the start of the page");
   const sendMsgForm = $("send-msg-form");
 
   //get elements on the html page and assign as variables
-
-  //These should get used, Brian
-  /*
-  const messageList = document.getElementById("messages");
-  const subjectInput = document.getElementById("subject-input");
-  */
   const sendMsgBtn = document.getElementById("send-button");
 
   // When the send button is clicked, we validate the subject and body are not blank
@@ -112,15 +108,6 @@ $(document).ready(() => {
       })
       .catch(handleMessageError);
   }
-
-  //query the database for messages where I'm the sending or receiving user and add below
-  //for each loop
-  //SELECT receivinguser.id, sendingUser.Id, messageBody FROM Messages WHERE Id ? :myId
-
-  //placeholder where I'll create a line item later
-  // const newMessage = document.createElement("li");
-  // messageList.append(newMessage);
-  //end loop
 
   function handleMessageError(err) {
     $("#alert .msg").text(err.responseJSON);

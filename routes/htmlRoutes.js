@@ -49,10 +49,14 @@ router.get("/members", isAuthenticated, (req, res) => {
   }
 });
 
+//-----
+//Working code for profile route
 router.get("/profiles/:username", isAuthenticated, (req, res) => {
   const sessionUser = req.user;
   if (!sessionUser) {
-    res.status(404).json({error: "you need to be logged in to see any profiles."});
+    res
+      .status(404)
+      .json({ error: "you need to be logged in to see any profiles." });
   } else {
     const usernameToLookAt = req.params.username;
     console.log(`The url wants a user named ${usernameToLookAt}`);
@@ -61,11 +65,15 @@ router.get("/profiles/:username", isAuthenticated, (req, res) => {
         username: usernameToLookAt
       }
     }).then(dbProfileOfUserWeAreLookingAt => {
-      console.log("dbProfileOfUserWeAreLookingAt.username: " + dbProfileOfUserWeAreLookingAt.username );
+      console.log(
+        "dbProfileOfUserWeAreLookingAt.username: " +
+          dbProfileOfUserWeAreLookingAt.username
+      );
       console.dir(dbProfileOfUserWeAreLookingAt);
       const profileData = dbProfileOfUserWeAreLookingAt.dataValues;
       profileData.layout = "index";
-      profileData.areTheyLookingAtTheirOwnProfile = (profileData.username === sessionUser.username );
+      profileData.areTheyLookingAtTheirOwnProfile =
+        profileData.username === sessionUser.username;
       if (profileData.profileImagePath === null) {
         profileData.profileImagePath = "whoknows.webp";
       }
@@ -73,6 +81,31 @@ router.get("/profiles/:username", isAuthenticated, (req, res) => {
     });
   }
 });
+
+//-----
+//Cloned code for messages route. Commenting this out for now as it's erroring. Once stable, I want to use handlbars
+// router.get("/my-messages", isAuthenticated, (req, res) => {
+//   const sessionUser = req.user;
+//   if (!sessionUser) {
+//     res
+//       .status(404)
+//       .json({ error: "you need to be logged in to see any profiles." });
+//   } else {
+//     const usernameToLookAt = req.params.username;
+//     console.log(`The url wants a user named ${usernameToLookAt}`);
+//     db.User.findAll({
+//       where: {
+//         username: usernameToLookAt
+//       }
+//     }).then(dbAllMyMessages => {
+//       console.log("dbAllMyMessages.username: " + dbAllMyMessages.username);
+//       console.dir(dbAllMyMessages);
+//       const messageData = dbAllMyMessages.dataValues;
+//       messageData.layout = "index";
+//       res.render("messages1", messageData);
+//     });
+//   }
+// });
 
 router.get("/messages", isAuthenticated, (req, res) => {
   if (req.user) {
