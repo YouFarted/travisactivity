@@ -1,18 +1,37 @@
+// import "bootstrap/dist/js/bootstrap.bundle";
+
 $(document).ready(() => {
+  //grab all of the usernames so we can render into the dropdown list
+  $.get("/api/messages").then(data => {
+    $(".message-list").text(data.username);
+    const mySelect = $("#username-input");
+    data.forEach(element => {
+      console.log(element.username);
+
+      mySelect.append(
+        $(
+          "<option id=" +
+            element.username +
+            ">" +
+            element.username +
+            "</option> "
+        )
+      );
+    });
+  });
+
   // Getting references to our form and input
   console.log("the start of the page");
   const sendMsgForm = $("send-msg-form");
 
   //get elements on the html page and assign as variables
+
+  //These should get used, Brian
   /*
-  These should get used, Brian
   const messageList = document.getElementById("messages");
   const subjectInput = document.getElementById("subject-input");
-  const bodyInput = document.getElementById("body-input");
   */
   const sendMsgBtn = document.getElementById("send-button");
-  const currentSubject = "asdf";
-  const currentBody = "asdf1";
 
   // When the send button is clicked, we validate the subject and body are not blank
   sendMsgForm.on("submit", event => {
@@ -20,17 +39,24 @@ $(document).ready(() => {
   });
 
   sendMsgBtn.addEventListener("click", event => {
-    console.log("inside the on submit");
+    //later, add validation to prevent click when 'please select' is selected
+    const recievingUserSelect = $("#username-input");
+    const currentSubject = $("#subject-input");
+    const currentBody = $("#body-input");
     event.preventDefault();
+
+    $.get("/api/user_data").then(data => {
+      $(".member-name").text(data.email);
+    });
+
     $.get("/api/user_data", user => {
-      console.log(JSON.stringify(user));
       const newMsgData = {
-        // subject: currentSubject.val(),
-        // body: currentBody.val(),
-        subject: currentSubject,
-        body: currentBody,
+        subject: currentSubject.val(),
+        body: currentBody.val(),
+        subject: currentSubject.val(),
+        body: currentBody.val(),
         sendingUserId: user.username,
-        receivingUserId: "SomeGal1"
+        receivingUserId: recievingUserSelect.val()
       };
 
       if (!newMsgData.subject || !newMsgData.body) {
@@ -45,14 +71,12 @@ $(document).ready(() => {
         newMsgData.receivingUserId
       );
     });
-
-    // subjectInput.val("");
-    // bodyInput.val("");
   });
 
   // Does a post to the sendMessage route. If successful, it reloads the page
   // Otherwise we log any errors
   function sendMessage(subject, body, sendingUserId, receivingUserId) {
+    console.log("test: ", $("#username-input option:selected").text());
     console.log("this is after it enters send message");
     $.post("/api/messages", {
       subject: subject,
@@ -61,9 +85,8 @@ $(document).ready(() => {
       receivingUserId: receivingUserId
     })
       .then(() => {
-        //I believe this'll work?
-        // window.location.reload();
-        // If there's an error, handle it by throwing up a bootstrap alert
+        //clears out the values
+        window.location.reload();
       })
       .catch(handleMessageError);
   }

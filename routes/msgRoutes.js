@@ -20,4 +20,15 @@ router.post("/api/messages", (req, res) => {
     });
 });
 
+router.get("/api/messages", (req, res) => {
+  console.log("all the users!");
+  db.User.findAll({
+    attributes: ["username"]
+  }).then(dbUser => {
+    res.json(dbUser);
+  });
+});
+
+//respond res.json with array object.
+
 module.exports = router;
