@@ -50,23 +50,26 @@ router.get("/members", isAuthenticated, (req, res) => {
 });
 
 router.get("/profiles/:username", isAuthenticated, (req, res) => {
-  if (!req.user) {
+  let sessionUser = req.user;
+  if (!sessionUser) {
     res.status(404).json({error: "you need to be logged in to see any profiles."});
   } else {
-    //!!!!
-    // get the user from the db that matches username
     const usernameToLookAt = req.params.username;
     console.log(`The url wants a user named ${usernameToLookAt}`);
     db.User.findOne({
       where: {
         username: usernameToLookAt
       }
-    }).then(dbUser => {
-      console.log("dbUser.username: " + dbUser.username );
-      console.dir(dbUser);
-      //dbUser.layout = 'index';
-      res.render("main", dbUser);
-      //res.render('main', {layout: 'index', username: dbUser.username});
+    }).then(dbProfileOfUserWeAreLookingAt => {
+      console.log("dbProfileOfUserWeAreLookingAt.username: " + dbProfileOfUserWeAreLookingAt.username );
+      console.dir(dbProfileOfUserWeAreLookingAt);
+      let profileData = dbProfileOfUserWeAreLookingAt.dataValues;
+      profileData.layout = 'index';
+      profileData.areTheyLookingAtTheirOwnProfile = (profileData.username === sessionUser.username )
+      if (profileData.profileImagePath === null) {
+        profileData.profileImagePath = "whoknows.webp";
+      }
+      res.render("main", profileData);
     });
   }
 });

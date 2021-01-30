@@ -90,7 +90,10 @@ router.post("/api/profileImageUpload", type, (req, res) => {
   console.log("great!");
   if (!req.user) {
     res.json({});
-  } else {
+  } else if(!req.file) {
+    res.redirect("/profiles/" + req.user.username);
+  } else
+  {
     const tmpPath = req.file.path;
     let ext = null;
 
@@ -108,9 +111,9 @@ router.post("/api/profileImageUpload", type, (req, res) => {
       basenameWithoutExtension = splitBasename[0];
     }
 
-    const targetWebPath = "userimages/" + basenameWithoutExtension + ext;
-    const targetFilePath = "public/" + targetWebPath;
-    console.log("new web file at: " + targetWebPath);
+    const savedFilename = basenameWithoutExtension + ext
+    const targetFilePath = "public/userimages/" + savedFilename;
+    console.log("new web file at: " + targetFilePath);
 
     fs.rename(tmpPath, targetFilePath, err => {
       if (err) {
@@ -122,11 +125,12 @@ router.post("/api/profileImageUpload", type, (req, res) => {
           }
         }).then(dbUser => {
           dbUser.update({
-            profileImagePath: targetWebPath
+            profileImagePath: savedFilename
           });
           // this updates the loaded user in the session for when this is reused within the current session.
-          req.user.profileImagePath = targetWebPath;
-          res.redirect("/profile.html");
+          req.user.profileImagePath = savedFilename;
+          // after the file uploads, refresh this user's profile page which is where they must be to tripper the file upload
+          res.redirect("/profiles/" + req.user.username);
         });
       }
     });
