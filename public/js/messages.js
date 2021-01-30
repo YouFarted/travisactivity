@@ -50,8 +50,12 @@ $(document).ready(() => {
   const sendMsgForm = $("send-msg-form");
 
   //get elements on the html page and assign as variables
+
+  //These should get used, Brian
+  /*
   const messageList = document.getElementById("messages");
   const subjectInput = document.getElementById("subject-input");
+  */
   const sendMsgBtn = document.getElementById("send-button");
 
   // When the send button is clicked, we validate the subject and body are not blank
@@ -74,8 +78,10 @@ $(document).ready(() => {
       const newMsgData = {
         subject: currentSubject.val(),
         body: currentBody.val(),
-        sendingUser_id: user.username,
-        receivingUser_id: recievingUserSelect.val()
+        subject: currentSubject.val(),
+        body: currentBody.val(),
+        sendingUserId: user.username,
+        receivingUserId: recievingUserSelect.val()
       };
 
       if (!newMsgData.subject || !newMsgData.body) {
@@ -86,22 +92,22 @@ $(document).ready(() => {
       sendMessage(
         newMsgData.subject,
         newMsgData.body,
-        newMsgData.sendingUser_id,
-        newMsgData.receivingUser_id
+        newMsgData.sendingUserId,
+        newMsgData.receivingUserId
       );
     });
   });
 
   // Does a post to the sendMessage route. If successful, it reloads the page
   // Otherwise we log any errors
-  function sendMessage(subject, body, sendingUser_id, receivingUser_id) {
+  function sendMessage(subject, body, sendingUserId, receivingUserId) {
     console.log("test: ", $("#username-input option:selected").text());
     console.log("this is after it enters send message");
     $.post("/api/messages", {
       subject: subject,
       body: body,
-      sendingUser_id: sendingUser_id,
-      receivingUser_id: receivingUser_id
+      sendingUserId: sendingUserId,
+      receivingUserId: receivingUserId
     })
       .then(() => {
         //clears out the values

@@ -69,7 +69,9 @@ router.get("/api/dev/runSeeds", (req, res) => {
     res.status(404).json({});
   } else {
     // run the reseed.
-    require("../lib/databaseSeed")().catch(e => console.error(e));
+    require("../lib/databaseSeed")()
+      .then(result => res.json({ reseedingSuccuss: result }))
+      .catch(e => res.json({ reseedingFail: e }));
     res.json({ reseeding: true });
   }
 });

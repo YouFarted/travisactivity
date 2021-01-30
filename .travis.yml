@@ -6,6 +6,7 @@ branches:
     - master
     - main
     - AEO
+    - MBO
     - brian
 cache:
   directories:
