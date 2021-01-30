@@ -1,9 +1,15 @@
-// import "bootstrap/dist/js/bootstrap.bundle";
+//use handlebars - most of this should be occurring in the routes
+//this ties in the end of weeks 13 and 14
 
 $(document).ready(() => {
+  //get the username of the logged in user
+  $.get("/api/user_data").then(data => {
+    $(".member-name").text(data.email);
+  });
+
   //grab all of the usernames so we can render into the dropdown list
   $.get("/api/messages").then(data => {
-    $(".message-list").text(data.username);
+    // $(".message-list").text(data.username);
     const mySelect = $("#username-input");
     data.forEach(element => {
       console.log(element.username);
@@ -17,6 +23,25 @@ $(document).ready(() => {
             "</option> "
         )
       );
+    });
+  });
+
+  //grab all of the messages so we can render into the page using HANDLEBARS
+  $.get("/api/myMessages").then(data => {
+    $(".message-list").text(data);
+    // const mySelect = $("#username-input");
+    data.forEach(element => {
+      console.log(element);
+
+      // mySelect.append(
+      //   $(
+      //     "<option id=" +
+      //       element.username +
+      //       ">" +
+      //       element.username +
+      //       "</option> "
+      //   )
+      // );
     });
   });
 

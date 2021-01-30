@@ -2,6 +2,8 @@
 const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
+const user = require("../models/user");
+const { Op } = require("sequelize");
 
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
@@ -41,6 +43,24 @@ router.get("/api/messages", (req, res) => {
     attributes: ["username"]
   }).then(dbUser => {
     res.json(dbUser);
+  });
+});
+
+router.get("/api/myMessages", (req, res) => {
+  console.log("all the messages!");
+  //   console.log(req.params);
+  //   console.log(User);
+  db.Message.findAll({
+    attributes: ["sendingUser_id", "receivingUser_id", "subject", "body"],
+    where: {
+      [Op.or]: [
+        { sendingUser_id: "yetanotherguy" },
+        { receivingUser_id: "yetanotherguy" }
+      ]
+    }
+    //WHERE username = req.params.username
+  }).then(dbMessages => {
+    res.json(dbMessages);
   });
 });
 
