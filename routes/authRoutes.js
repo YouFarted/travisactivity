@@ -90,10 +90,9 @@ router.post("/api/profileImageUpload", type, (req, res) => {
   console.log("great!");
   if (!req.user) {
     res.json({});
-  } else if(!req.file) {
+  } else if (!req.file) {
     res.redirect("/profiles/" + req.user.username);
-  } else
-  {
+  } else {
     const tmpPath = req.file.path;
     let ext = null;
 
@@ -111,7 +110,7 @@ router.post("/api/profileImageUpload", type, (req, res) => {
       basenameWithoutExtension = splitBasename[0];
     }
 
-    const savedFilename = basenameWithoutExtension + ext
+    const savedFilename = basenameWithoutExtension + ext;
     const targetFilePath = "public/userimages/" + savedFilename;
     console.log("new web file at: " + targetFilePath);
 
