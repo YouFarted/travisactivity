@@ -2,6 +2,9 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const handlebars = require("express-handlebars").create({
+  defaultLayout: "main"
+});
 
 let doOnlySeeding = false;
 
@@ -35,10 +38,13 @@ if (doOnlySeeding) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.engine("handlebars", handlebars.engine);
+
   const authRoutes = require("./routes/authRoutes");
   const htmlRoutes = require("./routes/htmlRoutes");
+  const msgRoutes = require("./routes/msgRoutes");
 
-  app.use(authRoutes, htmlRoutes);
+  app.use(authRoutes, htmlRoutes, msgRoutes);
 
   // Syncing our database and logging a message to the user upon success
   db.sequelize.sync().then(() => {

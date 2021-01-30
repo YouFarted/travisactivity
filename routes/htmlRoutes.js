@@ -35,17 +35,27 @@ router.get("/login", (req, res) => {
 // Here we've add our isAuthenticated middleware to this route.
 // If a user who is not logged in tries to access this route they will be redirected to the signup page
 router.get("/members", isAuthenticated, (req, res) => {
-  if(req.user.isDeveloper && !req.session.hasAlreadyBeenRedirectedFromMembersToDevelopersOnce) {
-    req.session.hasAlreadyBeenRedirectedFromMembersToDevelopersOnce = true;  
-    res.redirect("/developers"); 
-  }
-  else {
+  if (
+    req.user.isDeveloper &&
+    !req.session.hasAlreadyBeenRedirectedFromMembersToDevelopersOnce
+  ) {
+    req.session.hasAlreadyBeenRedirectedFromMembersToDevelopersOnce = true;
+    res.redirect("/developers");
+  } else {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   }
 });
 
+router.get("/messages", isAuthenticated, (req, res) => {
+  if (req.user) {
+    res.sendFile(path.join(__dirname, "../public/messages.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "../public/login.html"));
+  }
+});
+
 router.get("/developers", isAuthenticated, (req, res) => {
-  if(req.user.isDeveloper) {
+  if (req.user.isDeveloper) {
     res.sendFile(path.join(__dirname, "../private/developer_admin.html"));
   } else {
     res.redirect("/members");
@@ -53,7 +63,7 @@ router.get("/developers", isAuthenticated, (req, res) => {
 });
 
 router.get("/private/js/developer.js", isAuthenticated, (req, res) => {
-  if(req.user && req.user.isDeveloper) {
+  if (req.user && req.user.isDeveloper) {
     res.sendFile(path.join(__dirname, "../private/js/developer.js"));
   } else {
     res.status(404).end("nope - only devs get access to this");
