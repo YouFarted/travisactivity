@@ -37,11 +37,11 @@ router.get("/api/myMessages", (req, res) => {
   //   console.log(req.params);
   //   console.log(User);
   db.Message.findAll({
-    attributes: ["sendingUser_id", "receivingUser_id", "subject", "body"],
+    attributes: ["sendingUserId", "receivingUserId", "subject", "body"],
     where: {
       [Op.or]: [
-        { sendingUser_id: "yetanotherguy" },
-        { receivingUser_id: "yetanotherguy" }
+        { sendingUserId: "yetanotherguy" },
+        { receivingUserId: "yetanotherguy" }
       ]
     }
     //WHERE username = req.params.username
