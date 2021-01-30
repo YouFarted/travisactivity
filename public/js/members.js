@@ -4,4 +4,11 @@ $(document).ready(() => {
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
   });
+
+  const logout = $("button#logout");
+
+  logout.click(event => {
+    event.preventDefault();
+    window.location.href = "/logout";
+  });
 });

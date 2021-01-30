@@ -130,4 +130,15 @@ router.get("/private/js/developer.js", isAuthenticated, (req, res) => {
     res.status(404).end("nope - only devs get access to this");
   }
 });
+
+router.get("/logout", (req, res,) => {
+  req.logout();
+
+  req.session = null;
+
+  res.redirect("/");
+});
+
 module.exports = router;
+
+
