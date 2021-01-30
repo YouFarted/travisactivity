@@ -1,8 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const router = require("express").Router();
-const passport = require("../config/passport");
-const user = require("../models/user");
 const { Op } = require("sequelize");
 
 router.post("/api/messages", (req, res) => {
