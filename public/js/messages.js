@@ -1,5 +1,3 @@
-// import "bootstrap/dist/js/bootstrap.bundle";
-
 $(document).ready(() => {
   //grab all of the usernames so we can render into the dropdown list
   $.get("/api/messages").then(data => {
