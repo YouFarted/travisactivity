@@ -25,10 +25,12 @@ $(document).ready(() => {
   const sendMsgForm = $("send-msg-form");
 
   //get elements on the html page and assign as variables
+
+  //These should get used, Brian
   /*
-  These should get used, Brian
   const messageList = document.getElementById("messages");
   const subjectInput = document.getElementById("subject-input");
+  */
   const sendMsgBtn = document.getElementById("send-button");
 
   // When the send button is clicked, we validate the subject and body are not blank
