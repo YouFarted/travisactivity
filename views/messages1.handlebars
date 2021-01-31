@@ -10,7 +10,8 @@
     <image style="max-width: 500px" id="image" src="/userimages/{{profileImagePath}}"></image> --}}
     Messages
     <table>
-
+        {{#each messages}}
+        {{#dataValues}}
         <tr>
             <td>Sending User:</td>
             <td>{{sendingUserId}}</td>
@@ -27,7 +28,8 @@
             <td>Body:</td>
             <td>{{body}}</td>
         </tr>
-
+        {{/dataValues}}
+        {{/each}}
     </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

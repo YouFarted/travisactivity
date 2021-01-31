@@ -93,14 +93,25 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
   } else {
     const messageUsername = req.params.username;
     console.log(`The url wants a user named ${messageUsername}`);
-    db.Message.findOne({
+    db.Message.findAll({
       where: {
         sendingUserId: messageUsername
       }
     }).then(dbAllMyMessages => {
-      console.log("dbAllMyMessages.sendingUserId: " + dbAllMyMessages.username);
+      //this one works
+      console.log("dbAllMyMessages: ", dbAllMyMessages);
+      //this comes back as undefined
+      console.log(
+        "dbAllMyMessages.sendingUserId: ",
+        dbAllMyMessages.sendingUserId
+      );
+      //this one throws an error
+      console.log(
+        "dbAllMyMessages[0].sendingUserId: ",
+        dbAllMyMessages[0].sendingUserId
+      );
       console.dir(dbAllMyMessages);
-      const messageData = dbAllMyMessages.dataValues;
+      const messageData = dbAllMyMessages;
       messageData.layout = "main";
       res.render("messages1", messageData);
     });
