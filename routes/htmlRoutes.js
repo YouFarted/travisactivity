@@ -3,6 +3,7 @@
 const path = require("path");
 const router = require("express").Router();
 const db = require("../models");
+const moment = require("moment");
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -98,9 +99,23 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
         sendingUserId: messageUsername
       }
     }).then(dbAllMyMessages => {
+      //We need to change the date field and store it back in the variable before
+      //rending in handlebars
+      let dateManipulationTest = dbAllMyMessages.map(result => ({
+        createdAt: moment(result.createdAt).format("LLL"),
+        subject: result.subject,
+        sendingUserId: result.sendingUserId,
+        body: result.body,
+        sendingUserId: result.sendingUserId,
+        receivingUserId: result.receivingUserId
+      }));
+      console.log(dateManipulationTest);
       const messageData = dbAllMyMessages.map(result => result.toJSON());
       const message = { Message: messageData };
-      console.log("dbAllMyMessages: ", dbAllMyMessages);
+
+      var a = moment(dbAllMyMessages[0].createdAt).format("LLL");
+      console.log("this is supposed to be formatted", a);
+      console.log("not formatted date", dbAllMyMessages[0].createdAt);
       res.render("messages1", message);
     });
   }
@@ -129,4 +144,5 @@ router.get("/private/js/developer.js", isAuthenticated, (req, res) => {
     res.status(404).end("nope - only devs get access to this");
   }
 });
+
 module.exports = router;
