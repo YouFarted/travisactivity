@@ -1,17 +1,7 @@
 <body>
-
-    {{!-- {{#if areTheyLookingAtTheirOwnProfile}}
-    <form action="/api/profileImageUpload" method="post" enctype="multipart/form-data">
-        <span>Change profile picture:</span>
-        <input type="file" id="myImage" name="myImage">
-        <button type="submit" id="submitPhoto" name="submitPhoto">Submit Photo</button>
-    </form>
-    {{/if}}
-    <image style="max-width: 500px" id="image" src="/userimages/{{profileImagePath}}"></image> --}}
     Messages
     <table>
-        {{#each messages}}
-        {{#dataValues}}
+        {{#each Message}}
         <tr>
             <td>Sending User:</td>
             <td>{{sendingUserId}}</td>
@@ -28,7 +18,6 @@
             <td>Body:</td>
             <td>{{body}}</td>
         </tr>
-        {{/dataValues}}
         {{/each}}
     </table>
 

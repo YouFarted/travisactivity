@@ -98,22 +98,10 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
         sendingUserId: messageUsername
       }
     }).then(dbAllMyMessages => {
-      //this one works
+      const messageData = dbAllMyMessages.map(result => result.toJSON());
+      const message = { Message: messageData };
       console.log("dbAllMyMessages: ", dbAllMyMessages);
-      //this comes back as undefined
-      console.log(
-        "dbAllMyMessages.sendingUserId: ",
-        dbAllMyMessages.sendingUserId
-      );
-      //this one throws an error
-      console.log(
-        "dbAllMyMessages[0].sendingUserId: ",
-        dbAllMyMessages[0].sendingUserId
-      );
-      console.dir(dbAllMyMessages);
-      const messageData = dbAllMyMessages;
-      messageData.layout = "main";
-      res.render("messages1", messageData);
+      res.render("messages1", message);
     });
   }
 });
