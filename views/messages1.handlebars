@@ -4,21 +4,21 @@
     {{!-- for each message, create card with sending and receiving user, subject and body --}}
     {{!-- for later, create a summary of the messages grouped by user, with new path --}}
     {{!-- new path will show all of the messages in chronological order --}}
-    Messages
+    <h1> Messages</h1>
     {{#each Message}}
-    <div class="card">
-        <div class="card-header my-2">
+    <div class="card my-2">
+        <div class="card-header my-2 py-2">
+            Date: {{createdAt}}<br>
             Sending User: {{sendingUserId}}<br>
             Receiving User: {{receivingUserId}}<br>
-            Date: {{createdAt}}
         </div>
-        <div class="card-body">
+        <div class="card-body rounded border-primary">
             <p class="fw-bold my-0 ">Subject: {{subject}}</p>
             <p class="fw-normal">{{body}}</p>
         </div>
     </div>
     {{/each}}
-
+    <a href="/">Home</a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
