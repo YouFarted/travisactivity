@@ -1,8 +1,6 @@
 $(document).ready(() => {
   const login = $("button#login");
   const signup = $("button#signup");
-  //   const searchButton = $("submit#search-button");
-  //   const searchField = $("input#search-field");
 
   // When login button is clicked USER is redirected to login page
   login.click(event => {
