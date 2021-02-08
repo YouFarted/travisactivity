@@ -1,29 +1,51 @@
-<body>
-
-
-    {{!-- for each message, create card with sending and receiving user, subject and body --}}
-    {{!-- for later, create a summary of the messages grouped by user, with new path --}}
-    {{!-- new path will show all of the messages in chronological order --}}
-    <h1> Messages</h1>
-    {{#each Message}}
-    <div class="card my-2">
-        <div class="card-header my-2 py-2">
-            Date: {{createdAt}}<br>
-            Sending User: {{sendingUserId}}<br>
-            Receiving User: {{receivingUserId}}<br>
-        </div>
-        <div class="card-body rounded border-primary">
-            <p class="fw-bold my-0 ">Subject: {{subject}}</p>
-            <p class="fw-normal">{{body}}</p>
+<!-- navbar -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/logout">
+                Logout
+            </a>
         </div>
     </div>
-    {{/each}}
-    <a href="/">Home</a>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
-    {{!--
-    <link href="./stylesheets/homepage.css" rel="stylesheet" /> --}}
-</body>
+</nav>
+<a href="/members">Home</a>
+{{!-- for each message, create card with sending and receiving user, subject and body --}}
+{{!-- for later, create a summary of the messages grouped by user, with new path --}}
+{{!-- new path will show all of the messages in chronological order --}}
+<h1> Messages</h1>
+<div>
+    <label for="username-input" default="please select">Send To</label>
+    <select id="username-input">
+        <option>Please select</option>
+    </select>
+</div>
+<form class="send-msg-form">
+    <div class="form-group">
+        <label for="subject-label">Subject</label>
+        <input type="text" id="subject-input" name="subject-input">
+    </div>
+    <div class="form-group">
+        <label for="subject-label">Body</label>
+        <textarea class="body-input" rows="4" id="body-input" name="body-input"></textarea><br>
+        <button type="submit" id="send-button" name="send-button">Send</button>
+    </div>
+</form>
 
-</html>
+
+{{#each Message}}
+<div class="card my-2">
+    <div class="card-header my-2 py-2">
+        Date: {{createdAt}}<br>
+        Sending User: {{sendingUserId}}<br>
+        Receiving User: {{receivingUserId}}<br>
+    </div>
+    <div class="card-body rounded border-primary">
+        <p class="fw-bold my-0 ">Subject: {{subject}}</p>
+        <p class="fw-normal">{{body}}</p>
+    </div>
+</div>
+{{/each}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />

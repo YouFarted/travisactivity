@@ -106,7 +106,7 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
     }).then(dbAllMyMessages => {
       //We need to change the date field and store it back in the variable before
       //rending in handlebars
-      let dateManipulationTest = dbAllMyMessages.map(result => ({
+      let messagePostDateFormat = dbAllMyMessages.map(result => ({
         createdAt: moment(result.createdAt).format("LLL"),
         subject: result.subject,
         sendingUserId: result.sendingUserId,
@@ -114,13 +114,8 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
         sendingUserId: result.sendingUserId,
         receivingUserId: result.receivingUserId
       }));
-      console.log(dateManipulationTest);
-      const messageData = dbAllMyMessages.map(result => result.toJSON());
-      const message = { Message: messageData };
-
-      var a = moment(dbAllMyMessages[0].createdAt).format("LLL");
-      console.log("this is supposed to be formatted", a);
-      console.log("not formatted date", dbAllMyMessages[0].createdAt);
+      console.log(messagePostDateFormat);
+      const message = { Message: messagePostDateFormat };
       res.render("messages1", message);
     });
   }
