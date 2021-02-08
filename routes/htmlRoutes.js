@@ -107,7 +107,7 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
     }).then(dbAllMyMessages => {
       //We need to change the date field and store it back in the variable before
       //rending in handlebars
-      let messagePostDateFormat = dbAllMyMessages.map(result => ({
+      const messagePostDateFormat = dbAllMyMessages.map(result => ({
         createdAt: moment(result.createdAt).format("LLL"),
         subject: result.subject,
         sendingUserId: result.sendingUserId,
