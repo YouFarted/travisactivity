@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  console.log("the javascript is connecting");
   //get the username of the logged in user
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);

@@ -1,142 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
-    <link href="./stylesheets/homepage.css" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-              <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                  </li> -->
-            </ul>
-            <!-- <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                id="search-field"
-              />
-              <button class="btn btn-outline-success" type="submit" id="search-button">
-                Search
-              </button>
-              
-            </form> -->
-            <button class="btn btn-outline-success" id="login" type="button">
-              Login
-            </button>
-            <button class="btn btn-outline-success" id="signup" type="button">
-              Sign-Up
-            </button>
-          </div>
-        </div>
-      </nav>
-    </div>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  <link href="./stylesheets/homepage.css" rel="stylesheet" />
 
-    <div class="container-fluid">
-      <figure class="image-container">
-        <img
-          src="./assets/hian-oliveira-rDPoVyPRebo-unsplash.jpg"
-          class="img"
-          alt="..."
-        />
-      </figure>
-    </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <div id="paragraph" class="container-fluid">
-      <h2>Welcome</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-        ullamcorper a risus vitae varius. In sed arcu quis ex congue elementum.
-        Donec ac sem ut erat tempor imperdiet et vel massa. Duis justo est,
-        vulputate ac ligula eu, vulputate suscipit nisl. Nunc nec finibus felis.
-        Ut gravida arcu orci. Vestibulum elementum vestibulum venenatis. Sed
-        quis metus orci. Quisque convallis, eros sed sollicitudin cursus, nulla
-        purus placerat est, id gravida purus tortor vel erat. Mauris efficitur
-        dictum ex a placerat. Pellentesque habitant morbi tristique senectus et
-        netus et malesuada fames ac turpis egestas. Etiam tristique neque magna,
-        vitae elementum est porta ac. Morbi volutpat imperdiet rutrum. Aliquam
-        eget ante ut nibh egestas dapibus. Suspendisse sagittis tristique ligula
-        sed posuere.
-      </p>
-    </div>
+</head>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <div id="paragraph" class="container-fluid">
-      <h2>Our Story</h2>
-      <p>
-        Sed euismod dignissim leo, sit amet porttitor orci ultricies
-        scelerisque. Vestibulum cursus metus in imperdiet varius. Nunc eu dictum
-        sapien. Sed non tristique urna. Morbi nisi arcu, pellentesque at mi sed,
-        venenatis efficitur purus. Curabitur gravida turpis eu dui lacinia
-        rutrum. Etiam ullamcorper vestibulum metus ut vestibulum. Donec a lacus
-        condimentum, semper diam non, pulvinar urna. Nam tincidunt nisi vitae
-        sodales posuere. Nulla tempor, risus et gravida porta, arcu quam laoreet
-        ante, at tincidunt dui justo id nibh. Morbi nunc nulla, posuere eget
-        molestie quis, egestas in ex. Quisque tellus lorem, dignissim nec leo
-        in, euismod cursus mauris. Nulla mollis erat in ex pellentesque
-        convallis. Integer vitae dapibus neque. Orci varius natoque penatibus et
-        magnis dis parturient montes, nascetur ridiculus mus. Suspendisse
-        potenti.
-      </p>
-    </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
-    <script src="js/homepage.js"></script>
-  </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <h1>
+          Meet someone new
+        </h1>
+
+        <button class="btn btn-outline-success" id="login" type="button">
+          Login
+        </button>
+        <button class="btn btn-outline-success" id="signup" type="button">
+          Sign-Up
+        </button>
+      </div>
+
+  </div>
+  </nav>
+  </div>
+
+  <div class="container-fluid">
+    <figure class="image-container">
+      <img src="./assets/hian-oliveira-rDPoVyPRebo-unsplash.jpg" class="img" alt="..." />
+    </figure>
+  </div>
+
+  <div></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  <script src="js/homepage.js"></script>
+</body>
+
 </html>

@@ -3,6 +3,8 @@
 const path = require("path");
 const router = require("express").Router();
 const db = require("../models");
+const moment = require("moment");
+const { Op } = require("sequelize");
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -71,41 +73,54 @@ router.get("/profiles/:username", isAuthenticated, (req, res) => {
       );
       console.dir(dbProfileOfUserWeAreLookingAt);
       const profileData = dbProfileOfUserWeAreLookingAt.dataValues;
-      profileData.layout = "index";
+      profileData.layout = "main";
       profileData.areTheyLookingAtTheirOwnProfile =
         profileData.username === sessionUser.username;
       if (profileData.profileImagePath === null) {
         profileData.profileImagePath = "whoknows.webp";
       }
-      res.render("main", profileData);
+      res.render("index", profileData);
     });
   }
 });
 
 //-----
 //Cloned code for messages route. Commenting this out for now as it's erroring. Once stable, I want to use handlbars
-// router.get("/my-messages", isAuthenticated, (req, res) => {
-//   const sessionUser = req.user;
-//   if (!sessionUser) {
-//     res
-//       .status(404)
-//       .json({ error: "you need to be logged in to see any profiles." });
-//   } else {
-//     const usernameToLookAt = req.params.username;
-//     console.log(`The url wants a user named ${usernameToLookAt}`);
-//     db.User.findAll({
-//       where: {
-//         username: usernameToLookAt
-//       }
-//     }).then(dbAllMyMessages => {
-//       console.log("dbAllMyMessages.username: " + dbAllMyMessages.username);
-//       console.dir(dbAllMyMessages);
-//       const messageData = dbAllMyMessages.dataValues;
-//       messageData.layout = "index";
-//       res.render("messages1", messageData);
-//     });
-//   }
-// });
+router.get("/my-messages/:username", isAuthenticated, (req, res) => {
+  const sessionUser = req.user;
+  const usernameToLookAt = req.params.username;
+  if (!sessionUser) {
+    res
+      .status(404)
+      .json({ error: "you need to be logged in to see any profiles." });
+  } else {
+    const messageUsername = req.params.username;
+    console.log(`The url wants a user named ${messageUsername}`);
+    db.Message.findAll({
+      where: {
+        [Op.or]: [
+          { sendingUserId: usernameToLookAt },
+          { receivingUserId: usernameToLookAt }
+        ]
+      },
+      order: [["id", "DESC"]]
+    }).then(dbAllMyMessages => {
+      //We need to change the date field and store it back in the variable before
+      //rending in handlebars
+      const messagePostDateFormat = dbAllMyMessages.map(result => ({
+        createdAt: moment(result.createdAt).format("LLL"),
+        subject: result.subject,
+        sendingUserId: result.sendingUserId,
+        body: result.body,
+        sendingUserId: result.sendingUserId,
+        receivingUserId: result.receivingUserId
+      }));
+      console.log(messagePostDateFormat);
+      const message = { Message: messagePostDateFormat };
+      res.render("messages1", message);
+    });
+  }
+});
 
 router.get("/messages", isAuthenticated, (req, res) => {
   if (req.user) {
@@ -130,4 +145,5 @@ router.get("/private/js/developer.js", isAuthenticated, (req, res) => {
     res.status(404).end("nope - only devs get access to this");
   }
 });
+
 module.exports = router;
