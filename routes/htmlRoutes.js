@@ -102,7 +102,8 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
           { sendingUserId: usernameToLookAt },
           { receivingUserId: usernameToLookAt }
         ]
-      }
+      },
+      order: [["id", "DESC"]]
     }).then(dbAllMyMessages => {
       //We need to change the date field and store it back in the variable before
       //rending in handlebars
