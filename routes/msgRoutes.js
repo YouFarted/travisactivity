@@ -43,6 +43,8 @@ router.get("/api/myMessages", (req, res) => {
     }
     //WHERE username = req.params.username
   }).then(dbMessages => {
+    // console.log(dbMessages);
+    console.log(dbMessages.createdAt);
     res.json(dbMessages);
   });
 });

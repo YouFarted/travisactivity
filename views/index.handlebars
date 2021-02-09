@@ -1,5 +1,5 @@
 <body>
-    
+
     {{#if areTheyLookingAtTheirOwnProfile}}
     <form action="/api/profileImageUpload" method="post" enctype="multipart/form-data">
         <span>Change profile picture:</span>
@@ -8,7 +8,7 @@
     </form>
     {{/if}}
     <image style="max-width: 500px" id="image" src="/userimages/{{profileImagePath}}"></image>
-    
+
     <table>
         <tr>
             <td>Username:</td>

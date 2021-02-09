@@ -3,7 +3,6 @@ sudo: enabled
 node_js: "12"
 branches:
   only:
-    - master
     - main
     - AEO
     - MBO
