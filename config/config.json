@@ -1,14 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": "Galaxy@123",
+    "password": "",
     "database": "dating_app",
     "host": "127.0.0.1",
+    "port": "3306",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "Galaxy@123",
+    "password": "",
     "database": "dating_app",
     "host": "127.0.0.1",
     "dialect": "mysql"
