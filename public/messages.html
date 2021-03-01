@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="nav">
+    <div class="navbar bg-secondary">
         <div class="nav-item">
             <a class="nav-link active" href="/members">Back to Members Page</a>
         </div>
@@ -23,19 +23,20 @@
             <option>Please select</option>
         </select>
     </div>
-    
-    <form class="send-msg-form">
-        <div class="form-group">
-            <label for="subject-label">Subject</label>
-            <input type="text" id="subject-input" name="subject-input">
-        </div>
-        <div class="form-group">
-            <label for="subject-label">Body</label>
-            <textarea class="body-input" rows="4" id="body-input" name="body-input"></textarea><br>
-            <button type="submit" id="send-button" name="send-button">Send</button>
-        </div>
-    </form>
 
+<div class="row">
+        <form class="send-msg-form">
+            <div class="form-group">
+                <label for="subject-label">Subject</label>
+                <input type="text" id="subject-input" name="subject-input">
+            </div>
+            <div class="form-group">
+                <label for="subject-label">Body</label>
+                <textarea class="body-input" rows="4" id="body-input" name="body-input"></textarea><br>
+                <button type="submit" id="send-button" name="send-button">Send</button>
+            </div>
+        </form>
+     
     <h2>All my Messages</h2>
     <!-- <input type="text" class="message-list" id="message-list"></input> -->
     <table class="message-list" id="message-list">
@@ -51,6 +52,7 @@
         </tr>
 
     </table>
+</div>
 
 
 
