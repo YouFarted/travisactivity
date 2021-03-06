@@ -14,16 +14,16 @@
   </head>
 
   <body>
-    <div class="navbar bg-secondary">
+    <div class="navbar bg-light">
       <div class="nav-item">
-        <a class="nav-link active" href="/members">Back to Members Page</a>
+        <a class="btn btn-outline-success" href="/members">Back to Members Page</a>
       </div>
     </div>
     <div class="row">
       <div class=" col-md-4 ">
         <form>
           <div class="form-group">
-            <label for="username-input" default="please select">Send To</label>
+            <label for="username-input" default="please select">Send To:</label>
             <select class="form-control" id="username-input">
               <option>Please select</option>
             </select>
@@ -32,17 +32,18 @@
 
         <form>
           <div class="form-group">
-            <label for="subject-label">Subject</label>
+            <label for="subject-label">Subject:</label>
             <input class="form-control" type="text" id="subject-input" name="subject-input" />
           </div>
           <div class="form-group">
-            <label for="exampleFormControlTextarea1">Body</label>
+            <label for="exampleFormControlTextarea1">Body:</label>
             <textarea
               class="form-control"
-              id="exampleFormControlTextarea1"
+              id=""
               rows="3"
             ></textarea>
           </div>
+          <button class="btn btn-primary" type="submit-input" id="send-button">Send</button>
         </form>
       </div>
 
