@@ -146,17 +146,6 @@ router.get("/private/js/developer.js", isAuthenticated, (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-router.get("/logout", (req, res,) => {
-  req.logout();
-
-  req.session = null;
-
-  res.redirect("/");
-});
-
-=======
->>>>>>> 8d8b5df2844d6d690bcf179740fb10706fef2671
 module.exports = router;
 
 
