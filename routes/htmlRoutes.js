@@ -115,7 +115,7 @@ router.get("/my-messages/:username", isAuthenticated, (req, res) => {
     // what would need to happen here for this to work would be to look up the id for the current sessionUser and to probably 
     // use the messages sql data to find all messages sent to that iser id.  But since this is the definition for a route and the behaviour for
     // routes should be limited to just connecting the route to a backend api, it would be better to delegate that functionality to a seperate api function defined elsewhere
-    res.status(400).end(`you tried to look up messages for ${usernameToLookAt} - good for you.  Sadly, the server does not support that.  Better luck next time.`)
+    res.status(400).end(`you tried to look up messages for ${usernameToLookAt} - good for you.  Sadly, the server does not support that.  Better luck next time.`);
   }
 });
 
